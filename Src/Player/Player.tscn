@@ -1,0 +1,238 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Player/hodul.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/leg.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/hip.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Player/head.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Player/Butt.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Player/hand.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/glove.png" type="Texture" id=7]
+[ext_resource path="res://Src/Player/Player.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Player/Chest.png" type="Texture" id=9]
+
+[node name="Player" type="RigidBody2D"]
+position = Vector2( -2, -2 )
+collision_layer = 128
+script = ExtResource( 8 )
+
+[node name="HeadCollide" type="CollisionPolygon2D" parent="."]
+position = Vector2( -14, 1 )
+polygon = PoolVector2Array( -18, -19, -14, -19, -12, -17, -11, -15, -11, -12, -12, -10, -14, -9, -18, -10, -20, -10, -21, -13, -21, -15, -20, -18 )
+
+[node name="HeadSprite" type="Sprite" parent="HeadCollide"]
+position = Vector2( -16, -10.1895 )
+scale = Vector2( 0.236842, 0.236842 )
+z_index = 1
+texture = ExtResource( 4 )
+offset = Vector2( -9.53674e-06, -15.6667 )
+
+[node name="Neck" type="PinJoint2D" parent="."]
+position = Vector2( -30, -9 )
+node_a = NodePath("../Butt/Chest")
+node_b = NodePath("..")
+
+[node name="HandL" type="RigidBody2D" parent="."]
+position = Vector2( -28, -2 )
+collision_layer = 128
+collision_mask = 0
+mass = 2.0
+
+[node name="HandLCollide" type="CollisionPolygon2D" parent="HandL"]
+position = Vector2( -22, 8 )
+z_index = -1
+polygon = PoolVector2Array( 23, -10, 45, -10, 48, -11, 52, -11, 53, -9, 51, -6, 45, -6, 44, -7, 23, -7 )
+
+[node name="HandL" type="Sprite" parent="HandL/HandLCollide"]
+position = Vector2( 25, -8 )
+scale = Vector2( 0.243057, 0.114844 )
+texture = ExtResource( 6 )
+offset = Vector2( 37.3694, -1.15514 )
+
+[node name="GloveL" type="Sprite" parent="HandL/HandLCollide/HandL"]
+position = Vector2( 81.1987, -2.147 )
+scale = Vector2( 0.566274, 1.00415 )
+texture = ExtResource( 7 )
+offset = Vector2( 28.533, -3.604 )
+
+[node name="HandJointL" type="PinJoint2D" parent="HandL"]
+node_a = NodePath("../../Butt/Chest")
+node_b = NodePath("..")
+
+[node name="HandR" type="RigidBody2D" parent="."]
+position = Vector2( -29, -1 )
+rotation = 2.99673
+collision_layer = 128
+collision_mask = 0
+mass = 2.0
+
+[node name="HandJointR" type="PinJoint2D" parent="HandR"]
+node_a = NodePath("../../Butt/Chest")
+node_b = NodePath("..")
+
+[node name="HandRCollide" type="CollisionPolygon2D" parent="HandR"]
+position = Vector2( -24.181, 7 )
+z_index = 1
+polygon = PoolVector2Array( 23, -10, 45, -10, 48, -11, 52, -11, 53, -9, 51, -6, 45, -6, 44, -7, 23, -7 )
+
+[node name="HandR" type="Sprite" parent="HandR/HandRCollide"]
+position = Vector2( 25, -8 )
+scale = Vector2( 0.243057, 0.114844 )
+texture = ExtResource( 6 )
+offset = Vector2( 37.3694, -1.15514 )
+
+[node name="GloveR" type="Sprite" parent="HandR/HandRCollide/HandR"]
+position = Vector2( 81.1987, -2.147 )
+scale = Vector2( 0.566274, 1.00415 )
+texture = ExtResource( 7 )
+offset = Vector2( 28.533, -3.604 )
+
+[node name="LegL" type="RigidBody2D" parent="."]
+position = Vector2( -29, 34 )
+collision_layer = 8
+collision_mask = 2147483649
+
+[node name="LegSpringJointL" type="DampedSpringJoint2D" parent="LegL"]
+position = Vector2( 0, -6 )
+node_a = NodePath("../../HipL")
+node_b = NodePath("..")
+length = 35.0
+
+[node name="LegJointL" type="PinJoint2D" parent="LegL"]
+node_a = NodePath("../../HipL")
+node_b = NodePath("..")
+
+[node name="LegLCollide" type="CollisionPolygon2D" parent="LegL"]
+position = Vector2( 14, -34 )
+z_index = -1
+polygon = PoolVector2Array( -15, 74, -14, 74, -14, 72, -15, 72, -15, 52, -10, 52, -10, 49, -13, 49, -13, 37, -16, 37, -16, 72, -17, 72, -17, 74 )
+
+[node name="LegL" type="Sprite" parent="LegL/LegLCollide"]
+position = Vector2( -14, 34 )
+rotation = 0.00174533
+scale = Vector2( 0.130578, 0.1336 )
+texture = ExtResource( 2 )
+offset = Vector2( 7.65436, 56.4151 )
+
+[node name="HodulL" type="Sprite" parent="LegL/LegLCollide/LegL"]
+position = Vector2( 0.00391997, 117.091 )
+scale = Vector2( 0.806331, 0.806331 )
+z_index = 1
+texture = ExtResource( 1 )
+offset = Vector2( 1.90735e-06, 55.6971 )
+
+[node name="LegR" type="RigidBody2D" parent="."]
+position = Vector2( -31.554, 34 )
+collision_layer = 4
+collision_mask = 2147483649
+
+[node name="LegSpringJointR" type="DampedSpringJoint2D" parent="LegR"]
+position = Vector2( 0, -6 )
+node_a = NodePath("../../HipR")
+node_b = NodePath("..")
+length = 35.0
+
+[node name="LegJointR" type="PinJoint2D" parent="LegR"]
+node_a = NodePath("../../HipR")
+node_b = NodePath("..")
+
+[node name="LegRCollide" type="CollisionPolygon2D" parent="LegR"]
+position = Vector2( 13, -34 )
+z_index = 2
+polygon = PoolVector2Array( -15, 74, -14, 74, -14, 72, -15, 72, -15, 52, -10, 52, -10, 49, -13, 49, -13, 37, -16, 37, -16, 72, -17, 72, -17, 74 )
+
+[node name="LegL" type="Sprite" parent="LegR/LegRCollide"]
+position = Vector2( -14, 34 )
+rotation = 0.00174533
+scale = Vector2( 0.130578, 0.1336 )
+texture = ExtResource( 2 )
+offset = Vector2( 7.65436, 56.4151 )
+
+[node name="HodulL" type="Sprite" parent="LegR/LegRCollide/LegL"]
+position = Vector2( 0.00391997, 117.091 )
+scale = Vector2( 0.806331, 0.806331 )
+z_index = 1
+texture = ExtResource( 1 )
+offset = Vector2( 1.90735e-06, 55.6971 )
+
+[node name="HipL" type="RigidBody2D" parent="."]
+position = Vector2( -29, 20 )
+collision_layer = 8
+collision_mask = 2
+
+[node name="HipJointL" type="PinJoint2D" parent="HipL"]
+node_a = NodePath("../../Butt")
+node_b = NodePath("..")
+
+[node name="HipSpringJointL" type="DampedSpringJoint2D" parent="HipL"]
+node_a = NodePath("../../Butt")
+node_b = NodePath("..")
+length = 1.0
+
+[node name="HipLCollide" type="CollisionPolygon2D" parent="HipL"]
+position = Vector2( 5, -22 )
+z_index = -2
+polygon = PoolVector2Array( -7, 20, -7, 21, -8, 21, -8, 24, -8, 28, -8, 35, -6, 37, -5, 37, -4, 36, -4, 35, -3, 29, -3, 25, -3, 24, -2, 24, -2, 21, -5, 20 )
+
+[node name="HipL" type="Sprite" parent="HipL/HipLCollide"]
+position = Vector2( -5, 22 )
+rotation = 0.00174533
+scale = Vector2( 0.130578, 0.178371 )
+texture = ExtResource( 3 )
+offset = Vector2( -2.24467, 35.8298 )
+
+[node name="HipR" type="RigidBody2D" parent="."]
+position = Vector2( -31, 20 )
+collision_layer = 4
+collision_mask = 2
+
+[node name="HipSpringJointR" type="DampedSpringJoint2D" parent="HipR"]
+node_a = NodePath("../../Butt")
+node_b = NodePath("..")
+length = 1.0
+
+[node name="HipJointR" type="PinJoint2D" parent="HipR"]
+node_a = NodePath("../../Butt")
+node_b = NodePath("..")
+
+[node name="HipRCollide" type="CollisionPolygon2D" parent="HipR"]
+position = Vector2( 5, -21 )
+z_index = 1
+polygon = PoolVector2Array( -7, 20, -7, 21, -8, 21, -8, 24, -8, 28, -8, 35, -6, 37, -5, 37, -4, 36, -4, 35, -3, 29, -3, 25, -3, 24, -2, 24, -2, 21, -5, 20 )
+
+[node name="HipR" type="Sprite" parent="HipR/HipRCollide"]
+position = Vector2( -5, 22 )
+rotation = 0.00174533
+scale = Vector2( 0.130578, 0.178371 )
+texture = ExtResource( 3 )
+offset = Vector2( -2.24467, 35.8298 )
+
+[node name="Butt" type="RigidBody2D" parent="."]
+position = Vector2( -30, 15 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Butt"]
+polygon = PoolVector2Array( -3, -7, 3, -7, 3, 6, 2, 7, -3, 7, -4, 3, -4, -4 )
+
+[node name="Sprite" type="Sprite" parent="Butt/CollisionPolygon2D"]
+position = Vector2( 0, -9.145 )
+scale = Vector2( 0.284, 0.284 )
+texture = ExtResource( 5 )
+
+[node name="Chest" type="RigidBody2D" parent="Butt"]
+position = Vector2( 0, -17 )
+collision_layer = 128
+collision_mask = 2147483650
+
+[node name="BodyCollide" type="CollisionPolygon2D" parent="Butt/Chest"]
+position = Vector2( 18, 4 )
+polygon = PoolVector2Array( -14, -7, -14, 8, -21, 8, -21, -3, -22, -4, -22, -7, -21, -10, -20, -11, -16, -11, -15, -10 )
+
+[node name="BodySprite" type="Sprite" parent="Butt/Chest/BodyCollide"]
+position = Vector2( -18, -13 )
+scale = Vector2( 0.284483, 0.284483 )
+texture = ExtResource( 9 )
+offset = Vector2( 0, 38 )
+
+[node name="GrooveJoint2D" type="PinJoint2D" parent="Butt/Chest"]
+position = Vector2( 0, 13 )
+node_a = NodePath("..")
+node_b = NodePath("../..")
